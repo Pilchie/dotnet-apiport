@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\lib\Microsoft.Fx.Portability.Offline\Microsoft.Fx.Portability.Offline.csproj" />
+    <ProjectReference Include="..\lib\Microsoft.Fx.Portability.MetadataReader\Microsoft.Fx.Portability.MetadataReader.csproj" />
+    <ProjectReference Include="..\lib\Microsoft.Fx.Portability\Microsoft.Fx.Portability.csproj" />
+  </ItemGroup>
+</Project>
