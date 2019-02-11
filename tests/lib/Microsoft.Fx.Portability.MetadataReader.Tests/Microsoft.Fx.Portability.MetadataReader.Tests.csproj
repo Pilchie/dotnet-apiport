@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
+    <TargetFramework>net472</TargetFramework>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <NonShipping>true</NonShipping>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework) == 'net461'">
+  <PropertyGroup Condition="$(TargetFramework) == 'net472'">
     <!-- Need to specify RuntimeIdentifier in here because using
     RuntimeIdentifiers will not copy native assets (ildasm) to the output.
     folder.

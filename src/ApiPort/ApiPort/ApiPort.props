@@ -7,13 +7,13 @@
       netcoreapp target must be first to avoid a ResXFileCodeGenerator issue
       (tracked at https://github.com/dotnet/project-system/issues/1519)
     -->
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net472'">
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
     <DefineConstants>$(DefineConstants);FEATURE_SYSTEM_PROXY;FEATURE_NETWORK_CREDENTIAL</DefineConstants>
   </PropertyGroup>
