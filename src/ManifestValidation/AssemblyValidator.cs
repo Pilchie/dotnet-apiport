@@ -19,6 +19,8 @@ namespace ManifestValidation
         private readonly ApiPortClient _client;
         private readonly ReadWriteApiPortOptions _options;
 
+        private ImmutableDictionary<IAssemblyFile, bool> _assemblies = ImmutableDictionary<IAssemblyFile, bool>.Empty;
+
         private AssemblyValidator()
         {
             var progressReporter = new NullProgressReporter();
@@ -41,17 +43,24 @@ namespace ManifestValidation
 
             _options = new ReadWriteApiPortOptions
             {
+                Targets = new[] { "netcoreapp3.0", "netstandard2.0" },
+                OutputFormats = new[] { "json" },
+                InvalidInputFiles = new string[0],
+                OutputFileName = @"C:\code\Setup-Engine\src\Setup.Operations\bin\Debug\api-port-results.json",
+                OverwriteOutputFile = true,
+                RequestFlags = AnalyzeRequestFlags.NoTelemetry,
             };
         }
 
         public bool AddFileToAnalyze(string path, Stream stream)
         {
-            _options.InputAssemblies.Add(new StreamAssemblyFile(path, stream), true);
+            ImmutableInterlocked.AddOrUpdate(ref _assemblies, new StreamAssemblyFile(path, stream), _ => true, (k, v) => true);
             return true;
         }
 
         public async Task AnalyzeAll()
         {
+            _options.InputAssemblies = _assemblies;
             await _client.WriteAnalysisReportsAsync(_options);
 
             foreach (var (asm, _) in _options.InputAssemblies)

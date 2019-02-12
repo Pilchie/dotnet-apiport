@@ -16,6 +16,7 @@ namespace ManifestValidation
             Name = path;
             _stream = new MemoryStream();
             stream.CopyTo(_stream);
+            _stream.Seek(0L, SeekOrigin.Begin);
         }
 
         public string Name { get; }

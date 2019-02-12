@@ -373,7 +373,7 @@ namespace Microsoft.Fx.Portability.Tests
 </runtime>
 </configuration>
 ```"
-#if NET461
+#if NET472
     .Replace(Environment.NewLine, "\n"),
 #else
     .Replace(Environment.NewLine, "\n", StringComparison.InvariantCulture),

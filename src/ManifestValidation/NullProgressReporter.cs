@@ -15,6 +15,7 @@ namespace ManifestValidation
 
         public void ReportIssue(string issue)
         {
+            Console.WriteLine($"***** Issue reported: '{issue}'");
             _issues.Add(issue);
         }
 
@@ -24,11 +25,13 @@ namespace ManifestValidation
 
         public IProgressTask StartTask(string taskName, int totalUnits)
         {
+            Console.WriteLine($"Starting '{taskName}'");
             return new NullProgressTask();
         }
 
         public IProgressTask StartTask(string taskName)
         {
+            Console.WriteLine($"Starting '{taskName}'");
             return new NullProgressTask();
         }
 

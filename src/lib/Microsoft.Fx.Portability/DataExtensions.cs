@@ -33,19 +33,24 @@ namespace Microsoft.Fx.Portability
 
         public static byte[] Serialize<T>(this T data)
         {
-            using (var outputStream = new MemoryStream())
+            var path = @"C:\Code\Setup-Engine\results.json";
+            using (var outputStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+            using (var writer = new StreamWriter(outputStream))
+            using (var jsonWriter = new JsonTextWriter(writer))
             {
-                using (var writer = new StreamWriter(outputStream))
+                var serializer = JsonSerializer.Create(JsonSettings);
+                serializer.Formatting = Formatting.None;
+                serializer.Serialize(jsonWriter, data);
+            }
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var jsonWriter = new JsonTextWriter(new StreamWriter(memoryStream)))
                 {
-                    using (var jsonWriter = new JsonTextWriter(writer))
-                    {
-                        var serializer = JsonSerializer.Create(JsonSettings);
-                        serializer.Formatting = Formatting.None;
-                        serializer.Serialize(jsonWriter, data);
-                    }
+                    Serializer.Serialize(jsonWriter, $"Results at '{path}'");
                 }
 
-                return outputStream.ToArray();
+                return memoryStream.GetBuffer();
             }
         }
 
