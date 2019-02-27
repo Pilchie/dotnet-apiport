@@ -39,7 +39,7 @@ namespace Microsoft.Fx.Portability
             using (var jsonWriter = new JsonTextWriter(writer))
             {
                 var serializer = JsonSerializer.Create(JsonSettings);
-                serializer.Formatting = Formatting.None;
+                serializer.Formatting = Formatting.Indented;
                 serializer.Serialize(jsonWriter, data);
             }
 
